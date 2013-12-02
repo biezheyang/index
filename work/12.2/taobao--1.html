@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>我的主页</title>
+	<meta name="description" content=" "/>
+	<!--<script src="js/test.js" />-->
+	<style>
+		bady,div,span,a,dl,dd{
+			margin:0;
+			padding:0;
+		}
+		a{
+		text-decoration:none;
+		line-height:20px;
+		display:block;
+		height:20px;
+		text-align:center;
+		color:#000;
+		font-family:微软雅黑;
+		}
+		.nav div{
+			border:1px solid red;
+			float:left;
+			width:98px;
+			height:20px;
+			position:relative;
+		}
+		span{
+			font-size:14px;
+		}
+		dl{
+			font-size:12px;
+			position:absolute;
+			width:100px;
+			top:19px;
+			left:-1px;
+			display:none;
+			z-index:1;
+			background-color:#660000;		
+		}
+	</style>
+</head>
+<body>
+	<div id="nav" class="nav">
+			<div class="fir">
+				<span><a href="##">我的淘宝</a></span>
+				<dl>
+					<dd><a href="#">已买到的宝贝</a></dd>
+					<dd><a href="#">店铺动态</a></dd>
+					<dd><a href="#">好友动态</a></dd>
+				</dl>
+			</div>
+			<div class="sec">
+				<span><a href="##">购物车</a></span>
+				<dl>
+					<dd><a href="#">查看我的购物车</a></dd>
+				</dl>
+			</div>
+			<div class="thi">
+				<span><a href="##">收藏夹</a></span>
+				<dl>
+					<dd><a href="#">收藏的宝贝</a></dd>
+					<dd><a href="#">收藏的店铺</a></dd>
+				</dl>
+			</div>
+			<div class="fou">
+				<span><a href="##">我要逛</a></span>
+				<dl>
+					<dd><a href="#">逛上新</a></dd>
+					<dd><a href="#">逛优惠</a></dd>
+					<dd><a href="#">小分队</a></dd>
+					<dd><a href="#">用手机逛</a></dd>
+					<dd><a href="#">商品分类</a></dd>
+				</dl>
+			</div>
+			<div class="fif">
+				<span><a href="##">卖家中心</a></span>
+				<dl>
+					<dd><a href="#">已卖出的宝贝</a></dd>
+					<dd><a href="#">出售中的宝贝</a></dd>
+				</dl>
+			</div>
+			<div class="six">
+				<span><a href="##">联系客服</a></span>
+				<dl>
+					<dd><a href="#">联系我们</a></dd>
+					<dd><a href="#">电话咨询</a></dd>
+				</dl>
+			</div>
+			<div class="sev">
+				<span><a href="##">网站导航</a></span>
+				<dl>
+					<dd><a href="#">主题市场</a></dd>
+					<dd><a href="#">特色购物</a></dd>
+				</dl>
+			</div>
+	</div>
+	<script>
+		var divs = document.getElementById("nav").getElementsByTagName("div");
+		var nav = document.getElementById("nav").getElementsByTagName("dl");
+		var subnav = document.getElementById("nav").getElementsByTagName("dd");
+		//	导航的onmouseover和onmouseout
+		function over(){
+			for (var i = 0;i < divs.length ;i++ ){
+				nav[i].style.display = (this == divs[i]) ? "block" : "none";
+				this.style.backgroundColor = "#df8000";
+				
+				}
+				for (var i = 0;i < divs.length ;i++ ){
+					divs[i].index = i;		
+					divs[i].onmouseout = function(){
+						nav[this.index].style.display = "none";	
+						this.style.backgroundColor = "#fff";
+					}	
+				}
+			
+		}
+		for (var i = 0;i < divs.length ;i++ ){
+			divs[i].onmouseover = over;
+		}
+		//	子导航的onmouseover和onmouseout	
+		for (var i =0;i < subnav.length ;i++ ){
+			subnav[i].index = i;
+			subnav[i].onmouseout = function(){
+				this.style.backgroundColor = "";
+			}	
+		}
+		for (var i =0;i < nav.length ;i++ ){
+			var subnavs = nav[i].getElementsByTagName("dd");	//	找到相应dl下的dd
+			for (var j =0;j < subnavs.length ;j++ ){
+				subnavs[j].index = i;
+				subnavs[j].onmouseover = inna;
+			}
+		}
+		function inna(){
+			var subnavs = nav[this.index].getElementsByTagName("dd");
+			for (var j =0;j < subnavs.length ;j++ ){
+				if (this ==subnavs[j]){
+					subnavs[j].style.backgroundColor = (j % 2 == 0) ? "#99cc33" : "#ff0033";
+				}
+			}	
+		}
+	</script>
+</body>
+</html>

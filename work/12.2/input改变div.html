@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>input改变div</title>
+	<meta name="description" content=" "/>
+	<!--<script src="js/test.js" />-->
+	<style>
+		body,div,input{
+			margin:0;
+			padding:0;
+		}
+		div{
+			width:400px;
+			height:400px;
+			background-color:#cc99ff;
+			border:10px solid #33ff00;
+		}
+	</style>
+</head>
+<body>
+		<button>RST</button>
+		<button>width</button>
+		<button>height</button>
+		<button>border-width</button>
+		<button>marhin-left</button>
+		<button>margin-top</button>
+		<input type="text" value="20" id="ipt" class="b"/>
+		<div id="div" class="a">input改变div</div>
+	<script>
+		var btn = document.getElementsByTagName("button");
+		var ipt = document.getElementById("ipt");
+		var div = document.getElementById("div");
+		var style = ["none","width","height","borderWidth","marginLeft","marginTop"]
+		for (var i = 0;i < btn.length ;i++ ){
+			btn[i].index = i;
+			if (i == 0){
+				btn[i].onclick = function(){
+					div.style.width = "400px";
+					div.style.height = "400px";
+					div.style.borderWidth = "10px";
+					div.style.margin = "0";
+				}
+			}
+			else{
+				btn[i].onclick = function(){	
+					div.style[style[this.index]] = ipt.value + "px";/*style.style[this.index]是错误的[this.index]会产生歧义	*/	
+				}
+			}
+		}
+/*********清除input的默认value值***********/
+		ipt.onclick = function(){
+			ipt.value = "";
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>我的主页</title>
+	<meta name="description" content=" "/>
+	<!--<script src="js/test.js" />-->
+	<style>
+		body,dd,span,dl{
+			margin:0;
+			padding:0;
+		}
+		span{
+			border:1px solid red;
+			float:left;
+			width:50px;
+			height:20px;
+			fongt-size:14px;
+			line-height:20px;
+			text-align:center;
+			background-color:#333;
+		}
+		.tab-span{
+			background-color:red;
+		}
+		.con{
+			clear:both;
+		}
+		dl{
+			border:1px solid red;
+			width:206px;
+			height:100px;
+		}
+		dd{
+			height:50px;
+			display:none;
+		}
+		.tab-dd{
+			display:block;
+		}
+	</style>
+</head>
+<body>
+	<div id="nav" class="nav">
+		<span>1</span>
+		<span>2</span>
+		<span>3</span>
+		<span>4</span>
+	</div>
+	<div id="con" class="con">
+		<dl>
+			<dd>1</dd>
+			<dd>2</dd>
+			<dd>3</dd>
+			<dd>4</dd>
+		</dl>
+	<div>
+	<div id="nav1" class="nav">
+		<span>1</span>
+		<span>2</span>
+		<span>3</span>
+		<span>4</span>
+	</div>
+	<div id="con1" class="con">
+		<dl>
+			<dd>1</dd>
+			<dd>2</dd>
+			<dd>3</dd>
+			<dd>4</dd>
+		</dl>
+	<div>
+	<div id="nav2" class="nav">
+		<span>1</span>
+		<span>2</span>
+		<span>3</span>
+		<span>4</span>
+	</div>
+	<div id="con2" class="con">
+		<dl>
+			<dd>1</dd>
+			<dd>2</dd>
+			<dd>3</dd>
+			<dd>4</dd>
+		</dl>
+	<div>
+	<script>
+		function fa(navid,conid){
+			var tabnav = document.getElementById(navid).getElementsByTagName("span");
+			var tabcon = document.getElementById(conid).getElementsByTagName("dd");
+			function fx(){
+				for (var i = 0;i < tabnav.length ;i++ ){
+					tabcon[i].className = (this == tabnav[i]) ? "tab-dd" : "";
+					tabnav[i].className = (this == tabnav[i]) ? "tab-span" : "";
+				}
+			}
+			for (var i = 0;i < tabnav.length ;i++ ){
+				tabnav[i].onmouseover = fx;
+			}
+		}
+		fa("nav","con");
+		fa("nav1","con1");
+		fa("nav2","con2");
+	</script>
+</body>
+</html>
