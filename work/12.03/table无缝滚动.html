@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>我的主页</title>
+	<meta name="description" content=" "/>
+	<!--<script src="js/test.js" />-->
+	<style>
+		body,table,tr,td{
+			margin:0;
+			padding:0;
+		}
+		div{
+			width: 1396px;
+			height:350px;
+			overflow:scroll;
+		}
+		table{
+			height:350px;
+			width:2792px;
+		} 
+		.a,.c,.d{
+			height:350px;
+			width:280px;
+		}
+		.b,.e{
+			height:350px;
+			width:278px;
+		}
+	</style>	
+</head>
+<body>
+	<div id = "outer">
+		<table cellpadding = 0 cellspacing = 0>
+			<tr id ="aa">
+				<td class="a"><img src = "../img/(1).jpg" alt="tab无缝滚动" title ="tab无缝滚动" /></td>
+				<td class="b"><img src = "../img/(2).jpg" alt="tab无缝滚动" title ="tab无缝滚动" /></td>
+				<td class="c"><img src = "../img/(3).jpg" alt="tab无缝滚动" title ="tab无缝滚动" /></td>
+				<td class="d"><img src = "../img/(4).jpg" alt="tab无缝滚动" title ="tab无缝滚动" /></td>
+				<td class="e"><img src = "../img/(5).jpg" alt="tab无缝滚动" title ="tab无缝滚动" /></td>
+			</tr>
+		</table>
+	</div>
+	<script>
+		var outer = document.getElementById("outer");
+		var aa = document.getElementById("aa");
+		aa.innerHTML += aa.innerHTML;
+		setTimeout(fx,17);
+		function fx(){
+			outer.scrollLeft+=5;
+			if (outer.scrollLeft >= 1396){
+				outer.scrollLeft = -1396;
+			}
+			setTimeout(fx,17)
+		}
+	</script>
+</body>
+</html>

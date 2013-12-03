@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>计时器</title>
+	<meta name="description" content=" "/>
+	<!--<script src="js/test.js" />-->
+	<style>
+		body,div,span,button{
+			margin:0;
+			padding:0;
+		}
+		button{
+			width:50px;
+
+		}
+		div{
+			border:1px solid #33ff66;
+			width:150px;
+			height:25px;
+			text-align:center;
+		}
+		div span{
+			line-height:25px;
+			font-size:20px;
+		}
+	</style>
+</head>
+<body>
+	<button id = "begin">begin</button>
+	<button id = "end">end</button>
+	<button id = "rst">RST</button>
+	 <div>
+		 <span id = "min">00</span>
+		 <span>:</span>
+		 <span id = "sec">00</span>
+		  <span>:</span>
+		 <span id = "ms">00</span>
+	 </div>
+	<script>
+		var begin = document.getElementById("begin");
+		var end= document.getElementById("end");
+		var rst= document.getElementById("rst");
+		var min= document.getElementById("min");
+		var sec= document.getElementById("sec");
+		var ms= document.getElementById("ms");
+		ms.innerHTML = "00";
+		sec.innerHTML = "00";
+		min.innerHTML = "00";
+		var i = ms.innerHTML;
+		var j = sec.innerHTML;
+		var k = min.innerHTML;
+		var t;
+		function msa(){
+			i++;
+			if (i < 10){
+				i = "0" + i;
+			}
+			if (i > 99){
+				i = "0" + 0;
+				j++;
+				if (j < 10){
+					j = "0" + j;
+				}
+				if (j > 59){
+					j = "0" + 0;
+					k++;
+					if (k < 10){
+						k = "0" + k;
+					}
+					if (k > 59){
+						k = 59;
+						j = 59;
+						i = 99;
+					}
+				}
+			}
+			ms.innerHTML = i;
+			sec.innerHTML = j;
+			min.innerHTML = k;
+			t = setTimeout(msa,10)
+		}
+		begin.onclick = function(){
+			if(t){ 
+				clearTimeout(t);
+			}
+			setTimeout(msa,10);
+		}
+		end.onclick = function(){
+			if(t){ 
+				clearTimeout(t);
+			}
+		}
+		rst.onclick = function(){
+			if (t){
+				clearTimeout(t);
+			}
+			i = "0" + 0;
+			j = "0" + 0;
+			k = "0" + 0;
+			ms.innerHTML = i;
+			sec.innerHTML = j;
+			min.innerHTML = k;
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>我的主页</title>
+	<meta name="description" content=" "/>
+	<!--<script src="js/test.js" />-->
+	<style>
+		body,div,img{
+			margin:0;
+			padding:0;
+		}
+		.outer{
+			overflow:hidden;
+			width:1080px;
+			height:179px;
+			margin:50px auto;
+			border:1px dotted red;
+		}
+		#inner{
+			width:2160px;
+			height:179px;
+		}
+		#inner img{
+			float:left;
+			width:270px;
+			height:179px;
+		}
+		.btn{
+			margin:0 auto;
+			width:200px;
+		}
+	</style>	
+</head>
+<body>
+	<div class = "outer" id = "outer">
+		<div id = "inner">
+			<img src="../img/a.gif" alt = "1" />
+			<img src="../img/b.gif" alt = "2" />
+			<img src="../img/c.gif" alt = "3" />
+			<img src="../img/d.gif" alt = "4" />
+		</div>
+	</div>
+	<div class="btn">
+		<button id = "l">←</button>
+		<button id = "s">♢</button>
+		<button id = "r">→</button>
+	</div>
+	<script>
+		var outer = document.getElementById("outer");
+		var inner = document.getElementById("inner");
+		var l = document.getElementById("l");
+		var r = document.getElementById("r");
+		var s = document.getElementById("s");
+		var d;
+		var t;
+		inner.innerHTML+=inner.innerHTML;
+			function fx(){
+				outer.scrollLeft += -1;
+				if (outer.scrollLeft == 0){
+					outer.scrollLeft = 1080;
+				}	
+				d = setTimeout(fx,1);
+			}
+			function fa(){
+				outer.scrollLeft += 1;
+				if (outer.scrollLeft == 1080){
+					outer.scrollLeft = 0;
+				}
+				t = setTimeout(fa,1)
+			}
+			l.onclick = function(){
+				if (d){
+					clearTimeout(d);
+				}
+				if (t){
+					clearTimeout(t);
+				}
+				setTimeout(fa,1)
+			}
+			r.onclick = function(){
+				if (d){
+					clearTimeout(d);
+				}
+				if (t){
+					clearTimeout(t);
+				}
+				setTimeout(fx,1)
+			}
+			s.onclick = function(){
+				if (d){
+					clearTimeout(d);
+				}
+				if (t){
+					clearTimeout(t);
+				}
+			}
+			/**/
+	</script>
+</body>
+</html>

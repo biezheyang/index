@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>我的主页</title>
+	<meta name="description" content=" "/>
+	<!--<script src="js/test.js" />-->
+	<style>
+		body,div,img{
+			margin:0;
+			padding:0;
+		}
+		.outer{
+			width:670px;
+			height:240px;
+			border:1px dotted red;
+			overflow:hidden;
+			margin:240px;
+		}
+		.inner{
+			width:670px;
+			height:2400px;
+		}
+		.inner img{
+			float:left;
+			width:670px;
+			height:240px;
+		}
+	</style>
+</head>
+<body>
+	<div id = "outer" class = "outer">
+		<div id = "inner" class = "inner">
+			<img src = "../img/1.jpg" alt = "无缝滚动" title = "无缝滚动" />
+			<img src = "../img/2.jpg" alt = "无缝滚动" title = "无缝滚动" />
+			<img src = "../img/3.jpg" alt = "无缝滚动" title = "无缝滚动" />
+			<img src = "../img/4.jpg" alt = "无缝滚动" title = "无缝滚动" />
+			<img src = "../img/5.jpg" alt = "无缝滚动" title = "无缝滚动" />
+		</div>
+	</div>
+	<script>
+		var outer = document.getElementById("outer");
+		var inner = document.getElementById("inner");
+		inner.innerHTML += inner.innerHTML;
+		setTimeout(fx,17);
+		function fx(){
+			outer.scrollTop+=2;
+			if (outer.scrollTop == inner.offsetHeight/2){
+				outer.scrollTop = 0;
+			}
+		setTimeout(fx,17);
+		}
+	</script>
+</body>
+</html>
