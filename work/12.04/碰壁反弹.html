@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>我的主页</title>
+	<meta name="description" content=" "/>
+	<!--<script src="js/test.js" />-->
+	<style>
+		.main{
+			width:899px;
+			height:429px;
+			position:relative;
+			border:1px solid #cc66ff;
+		}
+		.main div{
+			width:40px;
+			height:40px;
+			position:absolute;
+		}
+	</style>	
+</head>
+<body>
+	<div class="main" id="main">
+		<div class="ball" id="ball">
+			<img src="../img/tooth.gif" alt="呲牙" title="呲牙" />
+		</div>
+	</div>
+	<script>
+		var main = document.getElementById("main");
+		var ball = document.getElementById("ball");
+		var x = 0;
+		var y = 0;
+		var speedx = 2;
+		var speedy = 2;
+		var w;
+		var h;
+		function fx(){
+			x = x + speedx;
+			if ((speedx > 0 && x >= main.clientWidth-ball.offsetWidth) || (speedx < 0 && x <= 0)){
+				speedx = -speedx;
+			}
+			ball.style.left = x + "px";
+			setTimeout(fx,17);
+		}
+		function fy(){
+			y = y + speedy;
+			if ((speedy > 0 && y >= main.clientHeight-ball.offsetHeight) || (speedy < 0 && y <= 0)){
+				speedy = -speedy;
+			}
+			ball.style.top = y + "px";
+			setTimeout(fy,17);
+		}
+		fx();
+		fy();
+	</script>
+	
+</body>
+</html>
