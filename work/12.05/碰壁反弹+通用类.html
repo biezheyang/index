@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>我的主页</title>
+	<meta name="description" content=" "/>
+	<!--<script src="js/test.js" />-->
+	<style>
+		.main{
+			width:899px;
+			height:429px;
+			position:relative;
+			border:1px solid #cc66ff;
+		}
+		.ball{
+			width:40px;
+			height:40px;
+			position:absolute;
+		}
+	</style>	
+</head>
+<body>
+	<div class="main" id="main">
+		<div class="ball" id="ball">
+			<img src="../img/tooth.gif" alt="呲牙" title="呲牙" />
+		</div>
+	</div>
+	<script>
+		var main = document.getElementById("main");
+		var ball = document.getElementById("ball");
+		var y = 0;
+		var speedy = 2;
+		function moveTox(dom, prop, start, end, duration){
+			var x = start;
+			var speedx = (end - start) / duration;
+			var tprop = "_t_" + "prop";
+			if (dom[tprop]){
+				clearTimeout(dom[tprop])
+			}
+			function fx(){
+				x = x + speedx;
+				if ((speedx > 0 && x >= main.clientWidth-ball.offsetWidth) || (speedx < 0 && x <= start)){
+					speedx = -speedx; 
+				//	clearTimeout(dom[tprop]);
+				//	setTimeout(fx,2000);
+				//	return;
+				}
+				dom.style[prop] = x + "px";
+				dom[tprop] = setTimeout(fx,17);
+			}
+			fx();
+		}
+		moveTox(ball, "left", 0 ,899, 400);
+		function moveToy(dom, prop, start, end, duration){
+			var y = start;
+			var speedy = (end - start) / duration;
+			var tprop = "_t_" + prop;
+			function fy(){
+				y = y + speedy;
+				if ((speedy > 0 && y >= main.clientHeight-ball.offsetHeight) || (speedy < 0 && y <= start)){
+					speedy = -speedy;
+				}
+				dom.style[prop] = y + "px";
+				dom[tprop] = setTimeout(fy,17);
+			}
+			fy();
+		}
+		moveToy(ball, "top", 0, 429, 500);
+	</script>
+	
+</body>
+</html>
