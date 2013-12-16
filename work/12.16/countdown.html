@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>春节倒计时</title>
+	<meta name="description" content=" "/>
+	<!--<script src=".js" /></script>-->
+	<style>
+		body{
+			margin:0;
+			padding:0;
+			background-color:#333366;
+		}
+		.outer{
+			width:500px;
+			height:200px;
+			margin:100px auto;
+			background-color:#cc99ff;
+		}
+		.nowtimer,.timer{
+			width:500px;
+			height:100px;
+			text-align:center;
+			font-size:30px;
+			line-height:100px;
+		}
+		
+	</style>
+</head>
+<body>
+		<div class = "outer">
+			<div class = "nowtimer" id = "nowtimer"></div>
+			<div class = "timer" id = "timer"></div>
+		</div>
+	<script>
+		var nowtimer = document.getElementById("nowtimer");
+		var timer = document.getElementById("timer");
+		setInterval(function(){
+			var now = new Date();
+			nowtimer.innerHTML = "今天是"
+			+ now.getFullYear() + "年"
+			+ (now.getMonth() + 1) + "月"
+			+ now.getDate() + "日"
+			+ now.getHours() + "时"
+			+ now.getMinutes() + "分"
+			+ now.getSeconds() + "秒";
+		},1000)
+
+		var newyear = new Date(2014,0,31);
+		var t = setInterval(function(){
+			var now = new Date();
+			var time = newyear.getTime() - now.getTime();
+			var date = Math.floor(time / (1000 * 60 * 60 * 24));
+			var hour = Math.floor((time / (1000 * 60 * 60)) % 24);
+			var minute = Math.floor((time / (1000 * 60)) % 60);
+			var secons = Math.ceil((time / 1000) % 60);
+			if (time > 0){
+				timer.innerHTML = "距春节" + date + "天" + hour + "时" + minute + "分" + secons + "秒";
+			}else if(time > -86400000){
+				timer.innerHTML = "陶艳然祝大家新年快乐"
+			}else{
+				clearInterval(t);
+				timer.innerHTML = "加油2014"
+			}
+		},1000)
+	</script>
+</body>
+</html>                                                                                                                                                                                                                                             

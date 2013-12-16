@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>简单的日历表</title>
+	<meta name="description" content=" "/>
+	<!--<script src=".js" /></script>-->
+	<style>
+		body{
+			margin:0;
+			padding:0;
+		}
+		a{
+			text-decoration:none;
+			color:#ffff66;
+		}
+		.outer{
+			width:350px;
+			height:280px;
+			margin:100px auto;
+		}
+		.hd{
+			height:30px;
+			background-color:#ccccff;
+		}
+		.prev{
+			float:left;
+			width:100px;
+			font-weight:bold;
+		}
+		.next{
+			float:right;
+			width:100px;
+			font-weight:bold;
+		}
+		.cent{
+			float:left;
+			width:150px;
+		}
+		.hd a{
+			height:30px;
+			font-size:20px;
+			line-height:30px;
+			text-align:center;
+		}
+		.con{
+			height:250px;
+			background-color:#cc99ff;
+		}
+		.con a{
+			float:left;
+			width:50px;
+			height:50px;
+			font-size:30px;
+			line-height:50px;
+			text-align:center;
+		}
+	</style>
+</head>
+<body>
+	<div class = "outer">
+		<div class = "hd">
+			<a href = "####" class = "prev" id  = "prev">←</a>
+			<a href = "####" class = "cent" id = "cent"></a>
+			<a href = "####" class = "next" id = "next">→</a>
+		</div>
+		<div class = "con" id = "con">
+		</div>
+	</div>
+	<script>
+		var cent = document.getElementById("cent");
+		var cent = document.getElementById("cent");
+		var now = new Date();
+		var year = now.getFullYear();
+		var mon = now.getMonth();
+		var month = now.getMonth() + 1;
+		cent.innerHTML = year + "年" + month + "月";
+
+		prev.onclick =function(){
+			if (month > 1){
+				month--;
+			}else{
+				month = 12;
+			}
+			cent.innerHTML = year + "年" + month + "月";
+			day();
+		}
+
+		next.onclick = function(){
+			if (month < 11){
+				month++;
+			}else{
+				month = 1;
+			}
+			cent.innerHTML = year + "年" + month + "月";
+			day();
+		}
+
+		var num;
+		function day(){
+			if (month == 1 || month == 3 || month == 5 || 
+				month == 7 || month == 8 || month == 10 || month == 12){
+				num = 31;
+			}
+			if (month == 2){
+				if (year % 4 == 0){
+					num = 29
+				}else{
+					num = 28
+				}
+			}
+			if (month == 4 || month == 6 || month == 9 || month == 11){
+				num = 30
+			}
+			con.innerHTML = "";
+
+			for (var i = 1;i <= num ;i++ ){
+				con.innerHTML += ('<a href = "####">' + i + "</a>")
+			}
+		}
+		day();
+	</script>
+</body>
+</html>                                                                                                                                                                                                                                           

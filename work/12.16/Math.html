@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>随机显示</title>
+	<meta name="description" content=" "/>
+	<!--<script src=".js" /></script>-->
+	<style>
+		body,ol,li,button{
+			margin:0;
+			padding:0;
+		}
+		ol{
+			width:200px;
+			border:1px solid red;
+		}
+		li{
+			width:200px;
+			height:20px;
+			line-height:20px;
+			font-size:16px;
+		}
+		button{
+			border:none;
+			background-color:#cc66ff;
+			width:50px;
+			height:20px;
+			line-height:20px;
+			font-size:16px;
+		}
+		a{
+			display:block;
+			width:200px;
+			height:20px;
+			line-height:20px;
+			font-size:16px;
+			text-decoration:none;
+		}
+	</style>
+</head>
+<body>
+	<ol id = "newshd">
+		<li>1<a href = "####"></a></li>
+		<li>2<a href = "####"></a></li>
+		<li>3<a href = "####"></a></li>
+		<li>4<a href = "####"></a></li>
+		<li>5<a href = "####"></a></li>
+	</ol>
+	<script>
+		var Maths = ["新闻1", "新闻2", "新闻3", "新闻4", "新闻5", "新闻6", "新闻7", "新闻8", "新闻9", "新闻10", "新闻11", "新闻12", "新闻13", "新闻14", "新闻15", "新闻16", "新闻17", "新闻18", "新闻19", "新闻20", "新闻21", "新闻22", "新闻23", "新闻24", "新闻25", "新闻26", "新闻27", "新闻28", "新闻29", "新闻30", "新闻31", "新闻32", "新闻33", "新闻34", "新闻35", "新闻36", "新闻37", "新闻38", "新闻39", "新闻40", "新闻41", "新闻42", "新闻43", "新闻44", "新闻45", "新闻46", "新闻47", "新闻48", "新闻49", "新闻50"];
+		var lis = document.getElementById("newshd").getElementsByTagName("li");
+		for (var i = 0;i < lis.length ;i++ ){
+			lis[i].innerHTML = Maths[Math.floor(Math.random() * 50)];
+		}
+	</script>
+</body>
+</html>                                                                                                                                                                                                                                                                                                      
