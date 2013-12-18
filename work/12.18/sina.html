@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = "utf-8" />
+	<title>新浪微博发布效果</title>
+	<style>
+		body,div,textarea,button,p,span,input{
+			margin:0;
+			padding:0;
+		}
+		body{
+			background-color:#333;
+		}
+		.all{
+			width:550px;
+			margin:100px auto;
+		}
+		.writeCon{
+			overflow:hidden;
+			height:60px;
+		}
+		textarea{
+			float:left;
+			width:500px;
+			height:60px;
+			font-size:14px;
+			overflow:hidden;
+			border:none;
+		}
+		.publish{
+			width:48px;
+			float:left;
+			height:60px;
+			font-size:16px;
+			background-color:#eee;
+			border:none;
+		}
+		.showCon{
+			width:550px;
+			margin-top:5px;
+		}
+		.showCon div{
+			overflow:hidden;
+			margin:5px auto;
+			background-color:#ccccff;
+		}
+		.showCon div p{
+			width:550px;
+			float:left;
+			margin-top:5px;
+		}
+		.showCon div span{
+			float:left;
+			font-size:14px;
+			margin-top:5px;
+		}
+		.showCon div button{
+			float:right;
+			margin-right:10px;
+			width:40px;
+			height:20px;
+			margin-top:2px;
+			line-height:20px;
+			border:1px solid #333;
+			margin-bottom:5px;
+		}
+	</style>
+</head>
+<body>
+	<div class = "all">
+		<div id = "writeCon" class = "writeCon">
+			<textarea>请输入.......</textarea>
+			<button class = "publish">发表</button>
+		</div>
+		<div id = "showCon" class = "showCon">
+		</div>
+	</div>
+	<script>
+		var writeCon = document.getElementById("writeCon");
+		var showCon = document.getElementById("showCon");
+		//	清除文本框内容
+		writeCon.children[0].onclick = function(){
+			writeCon.children[0].value = "";
+		}
+
+		var i = 0;
+		function publishcon(){
+			i++;
+			var now = new Date();
+			var hour = now.getHours();
+			var minute = now.getMinutes();
+				hour =  (hour < 10) ? "0"+ hour : hour;
+				minute =  (minute < 10) ? "0"+ minute : minute;
+			//	在showCon生成一个div
+			var makeDiv = document.createElement("div");
+			//	在生成的div里生成一个p标签
+			var makeP = document.createElement("p");
+			//	在生成的div里生成一个span标签
+			var makeSpan = document.createElement("span");
+			//	在生成的div里生成一个button标签
+			var makebtn = document.createElement("button");
+			//	在showCon插入div
+			showCon.insertBefore(makeDiv, showCon.firstChild);
+			//	在生成的div里插入p标签
+			makeDiv.appendChild(makeP);
+			//	在生成的div里插入span标签
+			makeDiv.appendChild(makeSpan);
+			//	在生成的div里插入button
+			makeDiv.appendChild(makebtn);
+			//	p的内容 == 发布的内容
+			makeP.innerHTML = writeCon.children[0].value;
+			//	span的内容
+			makeSpan.innerHTML = hour + ":" + minute;
+			//	button的内容
+			makebtn.innerHTML = "删除"
+			//	删除
+			makebtn.onclick = function(){
+				showCon.removeChild(makeDiv);
+			}
+		} 
+		//	发表
+		writeCon.children[1].onclick = function(){
+			publishcon();
+		}
+	</script>
+</body>
+</html>
