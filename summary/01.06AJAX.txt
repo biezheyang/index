@@ -1,0 +1,30 @@
+AJAX迷你微博总结
+一）阅读文档接口（API）
+    1.网址：http://ajaxh518.taobaoxyz.com/api/user/
+    2.请求方式：常用get/post
+    3.格式：json/jsonp
+    4请求参数method=regist
+    url：http://ajaxh518.taobaoxyz.com/api/user/？method=regist
+
+二）应用jsonp格式
+    写一个通用函数，传入url和请求成功要执行的函数
+    function fa(url,fx){
+        $.ajax({
+            url : "http://ajaxh518.taobaoxyz.com/api/" + url,        
+            type : "get",
+            dataType : "jsonp",
+            jsonp : "jsoncb",
+            success : fx,
+            error : function(){
+                alert("找不到网址")
+            }
+        })
+    }
+
+三）获取指定用户信息是把相关属性存在标签上（迷你微博中的id和name）
+$("<li dataid="+data.data[i]._id+" dataname="+data.data[i].name+">" + data.data[i].name + "</li>")
+四）获取好友的微博列表（将获取的用户信息id和name的属性作为参数传入function，id作为网址的一部分，name是创建标签显示用户名）
+    getfriendinfo($(this).attr("dataid"),$(this).attr("dataname"))
+    function getfriendinfo(id,name)｛
+        var url = "msg/?method=list&uid="+id
+    ｝

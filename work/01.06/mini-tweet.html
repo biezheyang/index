@@ -1,0 +1,479 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>mini微博</title>
+	<script src="jquery-1.10.2.js"></script>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+			border:none;
+			list-style:none;
+			text-decoration:none;
+			font-family:微软雅黑;
+		}
+		body{
+			background-color:#ccccff;
+			position:relative;
+		}
+		.outer{
+			width:800px;
+			overflow:hidden;
+			border:1px solid red;
+			margin:50px auto;
+			background-color:#ffcc00;
+		}
+		.header span{
+			float:right;
+			font-size:12px;
+			margin:5px;
+			cursor:pointer;
+		}
+		.header .user{
+			float:left;
+		}
+		.release{
+			float:left;
+			width:780px;
+			margin:9px;
+		}
+		.import{
+			width:720px;
+			overflow:auto;
+			height:46px;
+			border:1px solid #999;
+		}
+		.publish{
+			float:right;
+			width:48px;
+			height:48px;
+			border:1px solid #999;
+		}
+		.mytweet{
+			float:left;
+			width:500px;
+			margin:10px;
+		}
+		.mytweet strong{
+			display:block;
+			text-align:center;
+			height:30px;
+			font-size:18px;
+			line-height:30px;
+		}
+		.newweet li,.friendweet li{
+			float:left;
+			width:500px;
+			border-bottom:1px dotted #333;
+		}
+		.newweet p,.friendweet p{
+			float:left;
+			width:500px;
+			font-size:14px;
+			margin:5px auto;
+		}
+		.timer,.laud,.dele{
+			float:left;
+			width:200px;
+			margin:5px auto;
+			font-size:12px;
+		}
+		.laud,.dele{
+			float:right;
+			width:100px;
+			margin:5px;
+			cursor:pointer;
+		}
+		.dele{
+			width:40px;
+			border:1px solid #999;
+		}
+		.friend{
+			float:right;
+			width:200px;
+			margin:10px 10px 10px 0;
+		}
+		.friend strong{
+			display:block;
+			text-align:center;
+			height:30px;
+			font-size:18px;
+			line-height:30px;
+		}
+		.friend li{
+			width:190px;
+			margin:5px;
+			font-size:14px;
+			cursor:pointer;
+			border-bottom:1px dotted #333;
+		}
+		.friend li a{
+			color:black;
+		}
+		.ashore{
+			position:absolute;
+			top:85px;
+			left:500px;
+			width:200px;
+			height:120px;
+			background-color:#999;
+			z-index:-10;
+			display:none;
+		}
+		.uname,.pwd{
+			float:left;
+			margin:10px 5px;
+			font-size:12px;
+		}
+		.unameipt,.pwdipt{
+			float:left;
+			width:150px;
+			height:18px;
+			margin:10px auto;
+		}
+		.land,.logon{
+			float:left;
+			margin:10px 25px;
+			width:50px;
+		}
+		.logout{
+			display:none;
+		}
+		.prev,.next{
+			display:none;
+			margin-right:10px;
+		}
+		
+		.friendtime{
+			float:left;
+			width:300px;
+			margin:5px auto;
+			font-size:12px;
+		}
+		.friendlaud{
+			float:right;
+			margin:5px auto;
+			font-size:12px;
+		}
+		.friendweet strong{
+			float:left;
+			font-size:12px;
+			height:20px;
+			line-height:20px;
+			width:200px;
+			overflow:hidden;
+			text-align:left;
+		}
+		.remind,.friendremind{
+			font-size:16px;
+			font-style:normal;
+			margin-top:20px;
+			float:left;
+			text-align:center;
+			width:500px
+		}
+		.friendremind{
+			width:200px;
+		}
+		.mytweet .my,.mytweet .friends{
+			width:500px;
+			text-align:center;
+			float:left;
+			display:none;
+		}
+		.header .returnme{
+			display:none;
+		}
+		.friend .friendlist{
+			display:none;
+		}
+	</style>
+</head>
+<body>
+	<div class="outer">
+		<!--顶部登录退出按钮部分-->
+		<div class="header">
+			<span class="user">未登陆状态</span>
+			<span class="logout">退出</span>
+			<span class="login">登陆</span>
+			<span class="returnme">返回我的微博</span>
+		</div>
+		<!--输入微博内容部分-->
+		<div class="release">
+			<textarea class="import"></textarea>
+			<button class="publish">发布</button>
+		</div>
+		<!--我的微博展示部分-->
+		<div class="mytweet">
+			<strong class="my">我的微博</strong>
+			<strong class="friends">好友的微博</strong>
+			<var class="remind">你还没有登录，登录后会显示你的微博....</var>
+			<ul class="newweet">
+			<!--
+				<li class="new">
+					<p>发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容</p>
+					<span class="timer">2013年12月31日12:12</span>
+					<button class="dele">删除</button>
+					<span class="laud">赞（100000）</span>
+				</li>
+			-->
+			</ul>
+			<ul class="friendweet">
+			<!--
+				<li>
+					<strong>好友名称</strong>
+					<p>发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容发布的内容</p>
+					<span class="friendtime">2013年12月31日12:12</span>
+					<span class="friendlaud">赞（100000）</span>
+				</li>
+			-->
+			</ul>
+			<!--<button class="mynext">下一页</button>
+			<button class="myprev">上一页</button>-->
+		</div>
+		<!--好友列表部分-->
+		<div class="friend">
+			<strong class="friendlist">好友列表</strong>
+			<var class="friendremind">登陆后可以看到好友</var>
+			<ul class="friendname">
+				<!--<li>用户1</li>-->	
+			</ul>
+			<button class="prev">上一页</button>
+			<button class="next">下一页</button>
+		</div>
+	</div>
+	<!--登录注册页面部分-->
+	<div class="ashore">
+		<span class="uname">昵称</span>
+		<input type="text" class="unameipt" />
+		<span class="pwd">密码</span>
+		<input type="password" class="pwdipt" />
+		<button class="land">登陆</button>
+		<button class="logon">注册</button>
+	</div>
+
+	<script>
+		//	$.ajax通用函数
+		function fa(url,fx){
+			$.ajax({
+				url : "http://ajaxh518.taobaoxyz.com/api/" + url,	
+				type : "get",
+				dataType : "jsonp",
+				jsonp : "jsoncb",
+				success : fx,
+				error : function(){
+					alert("找不到网址")
+				}
+			})
+		}
+		//	点击首页登录按钮
+		$(".login").click(function(){
+			$(".ashore").css("zIndex",10).show()
+		})
+		//	注册
+		$(".logon").click(function(){
+			var url = "user/?method=regist&name=" + $(".unameipt").val() +"&password="+ $(".pwdipt").val();
+			var t = function (data){
+				if (data.done){
+					alert("注册成功");
+					$(".ashore").hide();
+				}else{
+					switch(data.code){
+						case 0:
+							alert("未知错误");
+							break;
+						case 1:
+							alert("缺少用户名或密码");
+							break;
+						case 2:
+							alert("用户名重复");
+							break;
+					}
+				}	
+			}
+			fa(url,t);
+		})
+		//	登录
+		$(".land").click(function(){
+			var url = "user/?method=login&name="+ $(".unameipt").val() +"&password="+ $(".pwdipt").val();
+			var t = function(data){
+				if (data.done){
+					alert("登录成功");
+					$(".ashore").css("zIndex",-1).hide();
+					$(".login").hide();
+					$(".logout").show();
+					var t = $(".unameipt").val()
+					$(".user").html(t)
+					mine();
+					getfriend();
+					$(".next").show();
+					$(".remind").remove();
+					$(".friendremind").remove();
+					$(".friendlist").show();
+					$(".my").show();
+					$(".friends").hide();
+				}else{
+					switch(data.code){
+						case 0:
+							alert("用户名或密码不对，请重新登陆");
+							break;
+						case 1:
+							alert("未知错误");
+							break;
+					}
+				}
+			}
+			fa(url,t);
+		})
+		//返回我的微博
+		$(".returnme").click(function(){
+			$(".newweet").html('');
+			mine();
+			$(".friendweet").hide();
+			$(".newweet").show();
+			$(".friends").hide();
+			$(".my").show();
+			$(this).hide();
+		})
+		//	登录自动显示登录帐号的微博
+		function mine(){
+			function fa1(){
+				var url = "user/?method=getinfo";
+				var t = function(data){
+					var id = data.data._id;
+					fa2(id);
+				}
+				fa(url,t)
+				
+			};
+			fa1();
+			function fa2(id){
+				var url = "msg/?method=list&uid="+id; 
+				var t = function(data){
+					if (data.done){
+						for (var i = 0;i < data.data.length ;i++ ){
+							$('<li class="new"><p>'+ data.data[i].text +'</p><span class="timer">'+data.data[i].time +'</span><button class="dele">删除</button><span class="laud">赞（'+data.data[i].good+'）</span></li>').prependTo(".newweet")
+						}
+						$(".dele").click(function(){
+							$(this).parent().remove()
+						})
+					}
+				}
+				fa(url,t)
+			}
+		}
+		// 退出
+		$(".logout").click(function(){
+			var url = "user/?method=logout";
+			var t = function(){
+				var t = $(".user").html() + "已经退出"
+				alert(t)
+				$(".user").html("未登陆状态")
+				$(".logout").hide();
+				$(".login").show();
+			}
+			fa(url,t);
+			$(".my").hide();
+			$(".friends").hide();
+			$(".prev").hide();
+			$(".next").hide();
+			$(".newweet").html("");
+			$(".friendname").html("");
+			$(".friendweet").hide("");
+			$(".friendlist").hide();
+			$(".returnme").hide();
+			$('<var class="remind">你还没有登录，登录后会显示你的微博....</var>').prependTo(".mytweet");
+			$('<var class="friendremind">登陆后可以看到好友</var>').prependTo(".friend");
+		})
+		//	微博发布部分
+		$(".import").click(function(){
+			$(this).val("");
+		})
+		$(".publish").click(function(){
+			var url = "msg/?method=add&text="+ $(".import").val();
+			var t = function(data){
+				if (data.done){
+					$(".my").show();
+					$(".friends").hide();
+					$(".newweet").show();
+					function time(){
+						var now = new Date();
+						return now.getFullYear() + "年" + now.getMonth() + 1 +"月" + now.getDate() + "日" +　now.getHours() + ":" +now.getMinutes();
+					}
+					$('<li class="new"><p>'+ $(".import").val() +'</p><span class="timer">'+ time() +'</span><button class="dele">删除</button><span class="laud">赞（0）</span></li>').prependTo(".newweet")
+					$(".import").val("");
+					$(".dele").click(function(){
+						$(this).parent().remove()
+					})
+				}else{
+					alert("未登陆")
+				}	
+			}
+			fa(url,t)
+		})
+		//	获取好友列表
+		var page = 0;
+		function getfriend(){
+			var url = "user/?method=listuser&count&page="+ page;
+			var t = function(data){
+				if (data.done){
+					if (data.data.length < 10){
+						$(".next").hide()
+					}
+					if (data.data.length <= 0){
+						return
+					}
+					$(".friendname").html("");
+					for (var i = 0;i < data.data.length ;i++ ){
+						$("<li dataid="+data.data[i]._id+" dataname="+data.data[i].name+">" + data.data[i].name + "</li>").appendTo(".friendname")
+					}
+					//	获取用户信息
+					$(".friendname > li").each(function(){
+						$(this).click(function(){
+							$(".friendweet").html("");
+							$(".friends").show();
+							$(".my").hide();
+							$(".newweet").hide();
+							getfriendinfo($(this).attr("dataid"),$(this).attr("dataname"));
+							$(".friendweet").show();
+							$(".returnme").show();
+						})
+					})
+					//	获取用户信息end
+				}
+			}
+			fa(url,t)
+		}
+		//	下一页好友列表
+		$(".next").click(function(){
+			page++;
+			$(".prev").show();
+			getfriend();
+		})
+		//	上一页好友列表
+		$(".prev").click(function(){
+			if (page > 0){
+				page--;
+				$(".next").show();
+				getfriend();
+				if (page <= 0){
+					$(".prev").hide();
+				}
+			}
+		})
+		//	获取微博列表
+		function getfriendinfo(id,name){
+			var url = "msg/?method=list&uid="+id;
+			var t = function(data){
+				if (data.done){
+					for (var i = 0;i < data.data.length ;i++ ){
+						$('<strong>'+ name +'</strong><li><p>'+ data.data[i].text +'</p><span class="friendtime">'+ data.data[i].time +'</span><span class="friendlaud">赞（'+ data.data[i].good+'）</span></li>').appendTo(".friendweet")
+					}
+				}
+			}
+			fa(url,t)
+		}
+	</script>
+</body>
+</html>
